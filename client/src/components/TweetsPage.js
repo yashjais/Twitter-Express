@@ -16,15 +16,15 @@ function TweetsPage(props) {
         props.dispatch(getTweets(query))
         setQuery('')
     }
-    socket = io('localhost:3010');
+    // socket = io('localhost:3010');
 
-        socket.on('RECEIVE_MESSAGE', function(data){
-            addTweet(data);
-        });
+    //     socket.on('RECEIVE_MESSAGE', function(data){
+    //         addTweet(data);
+    //     });
         
-        const addTweet = data => {
-            console.log(data);
-        };
+    //     const addTweet = data => {
+    //         console.log(data);
+    //     };
     
     return (
         <div>
