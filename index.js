@@ -23,3 +23,4 @@ const server = app.listen(port, () => {
 
 io.listen(server)
 
+module.exports = io

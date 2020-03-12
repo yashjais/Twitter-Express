@@ -3,6 +3,9 @@ import {connect} from 'react-redux'
 import {getTweets} from '../actions/tweets'
 import io from "socket.io-client";
 
+const socket = io('http://localhost:3010');
+
+
 function TweetsPage(props) {
     const [query, setQuery] = useState('');
     const [skip, setSkip] = useState(1)
@@ -11,6 +14,9 @@ function TweetsPage(props) {
         setQuery(e.target.value)
     }
     const handleSubmit = (e) => {
+        socket.on('tweet', function(data){
+            console.log(data)
+        })
         e.preventDefault()
         console.log(query)
         props.dispatch(getTweets(query))

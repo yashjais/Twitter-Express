@@ -1,10 +1,11 @@
 const Twitter = require('../models/tweets')
 const twitter = require('twitter')
+const io = require('../../index')
 
 module.exports.list = (req, res) => {
     console.log(req.query)
     console.log(req.body)
-    const q = req.body.query
+    const q = req.body.query 
     const twit = new twitter({
         consumer_key: '881flbXb16SbwdP3R2sRKvdji',
         consumer_secret: '1lgXzKUdWoMzdvba4r1YEY7gAEXqlMOSRMq99Iz7mUM2nNikFi',
@@ -14,6 +15,7 @@ module.exports.list = (req, res) => {
      
     twit.stream('statuses/filter', { track: q}, function(stream) {
             stream.on('data', function(event) {
+            io.emit('tweet', event);
             console.log(event && event.text);
         }) 
        
