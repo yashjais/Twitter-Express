@@ -25,6 +25,7 @@ Twitter-Express is an application in which you can give a search parameter and o
 6. react-scripts: "3.3.0",
 7. redux: "^4.0.5",
 8. redux-thunk: "^2.3.0"
+9. socket.io-client: "^2.3.0" 
 
 ## Available Scripts
 
