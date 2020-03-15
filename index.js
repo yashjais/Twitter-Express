@@ -9,7 +9,9 @@ const Twitter = require('./app/models/tweets')
 
 setUpDb() 
 
-const port = 3010  
+// const port = 3010 
+const port = process.env.PORT || 3000; 
+const path = require('path')
 
 const twit = new twitter({
     consumer_key: '881flbXb16SbwdP3R2sRKvdji',
@@ -75,6 +77,11 @@ app.post('/tweets', (req, res) => {
 })
 
 // app.use('/', cors(corsOptions),  router)
+
+app.use(express.static(path.join(__dirname,"client/build"))) 
+app.get("*",(req,res) => { 
+    res.sendFile(path.join(__dirname + "/client/build/index.html")) 
+}) 
 
 const server = app.listen(port, () => {
     console.log('listening on the port')
