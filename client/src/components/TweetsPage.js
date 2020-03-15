@@ -5,7 +5,7 @@ import {setNewTweets} from '../actions/tweets'
 import io from "socket.io-client";
 import { Link } from 'react-router-dom'
 
-const socket = io('http://localhost:3010');
+const socket = io('https://yash-twitterr.herokuapp.com');
 
 
 function TweetsPage(props) {
