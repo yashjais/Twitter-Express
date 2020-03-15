@@ -21,3 +21,9 @@ export const getTweets = (query) => {
             .catch(err => alert(err))
     }
 }
+
+export const setNewTweets = (tweet) => {
+    return {
+        type: 'SET_NEWTWEET', payload: tweet
+    }
+}

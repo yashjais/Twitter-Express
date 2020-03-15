@@ -1,10 +1,12 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import tweetsReducers from '../reducers/tweets' 
+import newTweetsReducers from '../reducers/newTweet'
 import thunk from 'redux-thunk'
 
 const configureStore = () => {
     const store = createStore(combineReducers({
-        tweets: tweetsReducers
+        tweets: tweetsReducers,
+        newTweets: newTweetsReducers
     }), applyMiddleware(thunk))
     return store
 }

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import {connect} from 'react-redux'
 import {getTweets} from '../actions/tweets'
+import {setNewTweets} from '../actions/tweets'
 import io from "socket.io-client";
+import { Link } from 'react-router-dom'
 
 const socket = io('http://localhost:3010');
 
@@ -16,6 +18,7 @@ function TweetsPage(props) {
     const handleSubmit = (e) => {
         socket.on('tweet', function(data){
             console.log(data)
+            props.dispatch(setNewTweets(data))
         })
         e.preventDefault()
         console.log(query)
@@ -31,23 +34,38 @@ function TweetsPage(props) {
     //     const addTweet = data => {
     //         console.log(data);
     //     };
+
+    // const handleClick = () => {
+        
+    // }
     
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="query">Search</label>
-                <input type="text" id="query" name="query" value={query} onChange={handleChange} />
-                <input type="submit" />
+                <label htmlFor="query"></label>
+                <input type="text" id="query" placeholder="Search Twitter" className="rounded-pill" style={{position: 'fixed'}} name="query" value={query} onChange={handleChange}  /> 
+                <button className="float-right btn btn-primary" type="button" > <Link style={{color: '#f0f8ff'}}  to="/newTweets"> Notifications </Link> <span className="badge badge-light">{props.newTweets.length}</span>
+            </button>
             </form>
-            {
-                props.tweets.map((tweet, value) => {
-                    if(value <= skip * 10){
-                        return (
-                            <li key={tweet.id}>{tweet.text}</li>
-                        )
-                    }
-                })
-            }    
+            
+            <br />
+
+            <div className="card">
+                {
+                    props.tweets.map((tweet, value) => {
+                        if(value <= skip * 10){
+                            return (
+                                <div key={tweet.id} className="card-body text-light bg-dark" style={{height: '220px',margin: '15px', backgroundColor: '#000000'}}>
+                                    <h4 className="float-left"> <img style={{borderRadius: '50%'}} src={tweet.user.profile_image_url} /> {tweet.user.name} {`@${tweet.user.screen_name}`}</h4> <br /> <br /> <br />
+                                    <h5 className="card-title">{tweet.text}</h5>
+                                </div>
+                            )
+                        }
+                    })
+                }    
+            </div>
+
+            <br />
             <button onClick={() => setSkip(skip + 1)}>load more</button>
         </div>
     )
@@ -100,7 +118,8 @@ function TweetsPage(props) {
 
 const mapStateToProps = (state) => {
     return {
-        tweets: state.tweets
+        tweets: state.tweets,
+        newTweets: state.newTweets
     }
     
 }

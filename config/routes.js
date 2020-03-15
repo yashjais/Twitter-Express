@@ -9,5 +9,5 @@ router.post('/tweets', tweetsController.list)
 // app.get('/', routes.index);
 // app.get('/page/:page/:skip', routes.page);
 
-module.exports = router
+module.exports = router  
   
