@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const router = require('./config/routes')
+const path = require('path')
 const cors = require('cors')
 const setUpDb = require('./config/database')
 const twitter = require('twitter')
@@ -75,7 +76,6 @@ app.post('/tweets', (req, res) => {
 // app.use('/', cors(corsOptions),  router)
 // const port = 3010 
 const port = process.env.PORT || 3000; 
-const path = require('path')
 
 app.use(express.static(path.join(__dirname,"client/build"))) 
 app.get("*",(req,res) => { 
