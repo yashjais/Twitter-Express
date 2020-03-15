@@ -23,9 +23,9 @@ app.use(cors())
 //     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
 
-app.get('/', (req, res) => {
-    res.send('hello')
-}) 
+// app.get('/', (req, res) => {
+//     res.send('hello')
+// }) 
 
 app.use(express.json())
 // app.use('/',  router)  
