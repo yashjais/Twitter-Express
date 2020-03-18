@@ -19,23 +19,6 @@ twitterSchema.statics.getTweets = function(query) {
         access_token_secret: 'ISSVhx8UxSnDZ7cX1TklJ5BfYHIbZrGi2hJa8Sb97G2i7'
     })
 
-    // twit.get(`https://api.twitter.com/1.1/search/tweets.json?q=${query}`, function(error, tweets, response) {
-    //     if(error) throw error;
-    //     console.log(tweets);  // The favorites.
-    //     // console.log(response);  // Raw response object.
-    // })
-
-    // twit.stream('statuses/filter', { track: query}, function(stream) {
-    //         stream.on('data', function(event) {
-    //         console.log(event && event.text);
-    //     })
-   
-    //     stream.on('error', function(error) {
-    //         throw error;
-    //     })
-    // })
-    // return Promise.resolve([])
-
     return twit.get(`https://api.twitter.com/1.1/search/tweets.json?q=${query}`, {})
 }
   

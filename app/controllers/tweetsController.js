@@ -1,7 +1,7 @@
 const Twitter = require('../models/tweets')
 const twitter = require('twitter')
 // const io = require("../../index")
-const io = require('socket.io')();
+const io = require('../../config/socket')
 // io.on('connection', client => { ... });
 // io.listen(3000); 
 
@@ -18,13 +18,11 @@ module.exports.list = (req, res) => {
      
     twit.stream('statuses/filter', { track: q}, function(stream) {
             stream.on('data', function(event) {
-            // io.emit('tweet', event);
-            io.on('connection', client => {
-                client.on('tweet', event);
-            });
-            io.listen(3020);
+            io.emit('tweet', event); 
+            // io()
+            // io.listen(3020);
             console.log(event && event.text);
-        }) 
+        })  
        
         stream.on('error', function(error) {
             console.log(error)
